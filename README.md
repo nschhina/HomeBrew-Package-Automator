@@ -1,1 +1,1 @@
-# HomeBrew-Package-Automator-
+# HomeBrew-Package-Automator
