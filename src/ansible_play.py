@@ -1,58 +1,20 @@
 #!/usr/bin/python
+
 import os
-import json
-import shutil
-from collections import namedtuple
-from ansible.parsing.dataloader import DataLoader
-from ansible.vars.manager import VariableManager
-from ansible.inventory.manager import InventoryManager
-from ansible.playbook.play import Play
-from ansible.executor.task_queue_manager import TaskQueueManager
-from ansible.plugins.callback import CallbackBase
-import ansible.constants as C
+import sys
+import fileinput
 
-class ResultCallback(CallbackBase):
+# Store the contents of brew play template in brew_play_template
+# and required packages in brew_packages
+brew_play_template= open("brew_play_template.yml","r").read()
 
-  def v2_runner_on_ok(self, result, **kwargs):
-    host = result._host
-    print json.dumps({host.name: result._result}, indent=4)
+brew_packages= open("packages","r").read()
+brew_packages_array=brew_packages.split()
 
-#Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check'])
-loader = DataLoader()
-Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check', 'diff'])
-options = Options(connection='local', module_path=['/usr/share/ansible/plugins/modules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False)
-passwords = "hi"
+num_packages = len(brew_packages.splitlines())
 
-results_callback = ResultCallback()
+brew_playbook= open("brewplay.yml","a+")
 
-inventory = InventoryManager(loader=loader, sources='172.16.10.12,')
-variable_manager = VariableManager()
-variable_manager.set_inventory(inventory)
+for i in range(num_packages):
 
-play_source =  dict(
-        name = "Ansible Play",
-        hosts = 'localhost',
-        gather_facts = 'no',
-        tasks = [
-            dict(action=dict(module='shell', args='ls'), register='shell_out'),
-         ]
-    )
-play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
-
-
-
-tqm = None
-try:
-    tqm = TaskQueueManager(
-              inventory=inventory,
-              variable_manager=VariableManager(),
-              loader=loader,
-              options=options,
-              passwords=passwords,
-              stdout_callback= results_callback,  # Use our custom callback instead of the ``default`` callback plugin
-          )
-    result = tqm.run(play)
-finally:
-    if tqm is not None:
-        tqm.cleanup()
-    shutil.rmtree(C.DEFAULT_LOCAL_TMP, True)
+    brew_playbook.write(brew_play_template.replace("foo", brew_packages_array[i]))

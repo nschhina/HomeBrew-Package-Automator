@@ -1,6 +1,3 @@
-name: HomeBrew Package Automator
-hosts: localhost
-tasks:
   - homebrew:
     name: foo
     state: present
