@@ -1,0 +1,9 @@
+---
+- name: HomeBrew Package Automator
+  hosts: localhost
+  tasks:
+  - name: Install all Homebrew Packages
+    homebrew:
+      name: "{{ item }}"
+      state: present
+    with_items:

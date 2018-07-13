@@ -1,4 +1,0 @@
-  - homebrew:
-    name: foo
-    state: present
-    update_homebrew: yes
