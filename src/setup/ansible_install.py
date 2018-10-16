@@ -9,7 +9,7 @@ def pipinstaller():
     subprocess.check_call(tornado_install_command.split())
 
 def ansibleinstaller():
-    pip_install_ansible = 'sudo pip install ansible --quiet'
+    pip_install_ansible = 'pip install ansible'
     subprocess.check_call(pip_install_ansible.split())
-    pip_upgrade_ansible = 'sudo pip install ansible --upgrade --quiet'
+    pip_upgrade_ansible = 'pip install ansible --upgrade --quiet'
     subprocess.check_call(pip_upgrade_ansible.split())
