@@ -2,9 +2,10 @@
 import os
 import sys
 
-sys.path.append('src/compose_playbook')
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.append('compose_playbook')
 from compose_playbook import write_playbook
-sys.path.append('src/runner_playbook')
+sys.path.append('runner_playbook')
 from exec_playbook import exec_playbook
 
 def main():
