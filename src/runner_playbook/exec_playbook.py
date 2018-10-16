@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
 import sys
+import platform
 
 from collections import namedtuple
 
@@ -14,8 +15,21 @@ def exec_playbook():
         loader = DataLoader()
         inventory = InventoryManager(loader=loader, sources="")
         variable_manager = VariableManager(loader=loader, inventory=inventory)
-        playbook_path = 'brewplay.yml'
+        # Set playbook path
 
+        # If current OS is Mac
+        if platform.system()=='Darwin':
+            playbook_path = 'brewplay.yml'
+
+        # If current OS is Linux
+        elif platform.system()=='Linux':
+            playbook_path = 'packageplay.yml'
+
+        # If current OS is windows
+        elif platform.system()=='Windows':
+            playbook_path = 'winplay.yml'
+
+        # Print to error if playbook doesnt exist at the path required
         if not os.path.exists(playbook_path):
             print '[INFO] The playbook does not exist'
             sys.exit()
