@@ -5,8 +5,9 @@ import sys
 
 
 def main():
-    homebrew_install.homebrewinstaller()
-    print("installed Homebrew")
+    if(platform.system()=='Darwin'):
+        homebrew_install.homebrewinstaller()
+        print("installed Homebrew")
     ansible_install.pipinstaller()
     print("installed Pip")
     ansible_install.ansibleinstaller()
