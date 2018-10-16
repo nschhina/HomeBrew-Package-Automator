@@ -2,7 +2,7 @@
 import homebrew_install
 import ansible_install
 import sys
-
+import platform
 
 def main():
     if(platform.system()=='Darwin'):
