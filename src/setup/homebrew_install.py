@@ -1,4 +1,5 @@
 import subprocess
+import platform
 
 def homebrewinstaller():
     ruby_install_brew = 'sudo echo "YES" | ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
