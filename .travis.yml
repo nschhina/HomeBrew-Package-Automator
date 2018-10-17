@@ -1,5 +1,7 @@
 ---
 sudo: required
+python: "2.7"
+
 env:
   - ANSIBLE_VERSION=latest
   - ANSIBLE_VERSION=2.2.2.0
@@ -18,8 +20,6 @@ env:
   - ANSIBLE_VERSION=2.0.0.0
   - ANSIBLE_VERSION=1.9.6
 
-language: python
-
 before_install:
   - sudo apt-get update -qq
 
@@ -27,6 +27,6 @@ install:
     - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
     - pip install ansible --upgrade --quiet
 
-script:
+after_install:
   - "cd src"
   - "sudo python main.py"
