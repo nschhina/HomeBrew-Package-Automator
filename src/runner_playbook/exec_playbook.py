@@ -10,8 +10,6 @@ from ansible.vars.manager import VariableManager
 from ansible.inventory.manager import InventoryManager
 from ansible.executor.playbook_executor import PlaybookExecutor
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
 def exec_playbook():
        # Leveraging the Python 2.0 API for Executing ansible-playbook
         loader = DataLoader()

@@ -5,7 +5,7 @@ import sys
 import fileinput
 import platform
 import os.path
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 # Store the contents of brew play template in brew_play_template
 # and required packages in brew_packages
 def write_playbook():
