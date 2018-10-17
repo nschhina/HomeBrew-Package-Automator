@@ -2,6 +2,8 @@
 sudo: required
 dist: trusty
 
+
+# create/define various testing environment for different linux distros
 env:
   - ANSIBLE_VERSION=latest
 
@@ -9,12 +11,15 @@ language: python
 
 python: "2.7"
 
+# update the base os first before doing anything :P
 before_install:
   - sudo apt-get update -qq
 
+# Run my setup.py script
 install:
-    - if [ "$ANSIBLE_VERSION" = "latest" ]; then python src/setup.py;fi
+    - if [ "$ANSIBLE_VERSION" = "latest" ]; then python src/setup/setup.py;fi
 
+# Run my main script
 script:
   - "cd src"
   - "sudo python main.py"
