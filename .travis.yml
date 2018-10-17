@@ -3,10 +3,29 @@ sudo: required
 
 python: "2.7"
 
+env:
+  - distribution: centos
+    version: 7
+  - distribution: fedora
+    version: 26
+  - distribution: fedora
+    version: 25
+  - distribution: fedora
+    version: 24
+  - distribution: ubuntu
+    version: xenial
+  - distribution: ubuntu
+    version: trusty
+  - distribution: debian
+    version: stretch
+  - distribution: debian
+    version: jessie
 
+# Install dependencies in setup.py
 install:
   - "sudo python src/setup/setup.py"
 
+# Run the actual playbook script
 script:
   - "cd src"
   - "sudo python main.py"
