@@ -7,6 +7,6 @@ python: "2.7"
 install:
   - "sudo python src/setup/setup.py"
 
-after_install:
+script:
   - "cd src"
   - "sudo python main.py"
