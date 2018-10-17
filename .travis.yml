@@ -2,7 +2,7 @@
 language: python
 python: "2.7"
 before_script:
-  - "python src/setup/setup.py"
+  - "sudo python src/setup/setup.py"
 script:
   - "cd src"
-  - "python main.py"
+  - "sudo python main.py"
